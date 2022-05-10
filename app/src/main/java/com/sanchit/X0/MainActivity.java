@@ -16,28 +16,29 @@ public class MainActivity extends AppCompatActivity {
 // x represents 1
 // null represents 2
     int activePlayer = 0;
-    int gameState[]= {2, 2, 2, 2, 2, 2, 2, 2, 2};
-    int winningPositions[][] = {{0,1,2},{3,4,5},{6,7,8},
+    int [] gameState= {2, 2, 2, 2, 2, 2, 2, 2, 2};
+    int [][]winningPositions = {{0,1,2},{3,4,5},{6,7,8},
                                 {0,3,6},{1,4,7},{2,5,8},
                                 {0,4,8},{2,4,6}};
 
     public void onTap(View view){
         ImageView image = (ImageView) view;
         int activeImage= Integer.parseInt(image.getTag().toString());
-        TextView status = findViewById(R.id.status);
         if(!gameActive){
             gameReset(view);
         }
         if(gameState[activeImage] == 2 && gameActive){
             gameState[activeImage] = activePlayer;
-            image.setTranslationX(-1000f);
+            image.setTranslationY(-1000f);
             if(activePlayer == 0){
                 image.setImageResource(R.drawable.o);
                 activePlayer = 1;
+                TextView status = findViewById(R.id.status);
                 status.setText("X's turn");
             }else{
                 image.setImageResource(R.drawable.x);
                 activePlayer = 0;
+                TextView status = findViewById(R.id.status);
                 status.setText("O's turn");
             }
             image.animate().translationYBy(1000f).setDuration(300);
@@ -50,11 +51,12 @@ public class MainActivity extends AppCompatActivity {
 //finding who won
                 String winnerStr;
                 gameActive = false;
-                if(gameState[winningPosition[0]]== 0){
+                if(gameState[winningPosition[0]] == 0){
                     winnerStr = " O has won... KUDOS!!! ";
                 }else{
                     winnerStr = " X has won... KUDOS!!!";
                 }
+                TextView status = findViewById(R.id.status);
                 status.setText(winnerStr);
             }
         }
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         ((ImageView) findViewById(R.id.imageView6)).setImageResource(0);
         ((ImageView) findViewById(R.id.imageView7)).setImageResource(0);
         ((ImageView) findViewById(R.id.imageView8)).setImageResource(0);
+        TextView status = findViewById(R.id.status);
+        status.setText("O's turn- Tap to start");
     }
 
     @Override
