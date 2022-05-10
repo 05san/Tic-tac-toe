@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">X0</string>
     <string name="heading">Welcome to Tic-Tac-Toe</string>
+    <string name="readable">this is a cell</string>
 </resources>
